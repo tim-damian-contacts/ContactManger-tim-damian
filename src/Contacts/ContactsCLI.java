@@ -16,7 +16,7 @@ public class ContactsCLI {
         System.out.print("Enter " + name + "'s email: ");
         String email = input.getString();
 
-        Contact newContact = new Contact(name, phoneNumber, email);
+        Contacts newContact = new Contacts(name, phoneNumber, email);
 
         System.out.println("\nContact created:\n" + newContact);
     }
