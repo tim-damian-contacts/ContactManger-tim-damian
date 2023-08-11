@@ -71,7 +71,8 @@ public class ContactManager {
     private static void saveContacts() {
         try (BufferedWriter writer = new BufferedWriter(new FileWriter(FILE_PATH))) {
             for (Contacts contact : contacts) {
-                writer.write(contact.getName() + " | " + contact.getPhoneNumber());
+                String formattedPhoneNumber = formatPhoneNumber(contact.getPhoneNumber()); // Format phone number
+                writer.write(contact.getName() + " | " + formattedPhoneNumber + " | " + contact.getEmail());
                 writer.newLine();
             }
         } catch (IOException e) {
@@ -79,31 +80,63 @@ public class ContactManager {
         }
     }
 
+    private static String formatPhoneNumber(String phoneNumber) {
+        // Assuming phoneNumber is a string of digits without dashes
+        return phoneNumber.substring(0, 3) + "-" + phoneNumber.substring(3, 6) + "-" + phoneNumber.substring(6);
+    }
+
     private static void viewContacts() {
         System.out.println("Name | Phone number | Email");
-        System.out.println("-------------------");
+        System.out.println("--------------------------------------");
         for (Contacts contact : contacts) {
-            System.out.println(contact);
+            String formattedPhoneNumber = formatPhoneNumber(contact.getPhoneNumber()); // Format phone number
+            System.out.println(contact.getName() + " | " + formattedPhoneNumber + " | " + contact.getEmail());
         }
     }
 
     private static void addContact(Scanner scanner) {
         System.out.print("Enter the name: ");
         String name = scanner.next();
+
+        // Check if the name already exists
+        Contacts existingContact = null;
+        for (Contacts contact : contacts) {
+            if (contact.getName().equalsIgnoreCase(name)) {
+                existingContact = contact;
+                break;
+            }
+        }
+
+        if (existingContact != null) {
+            System.out.println("A contact with the same name already exists.");
+            System.out.print("Do you want to override the existing contact? (yes/no): ");
+            String overrideChoice = scanner.next();
+            if (overrideChoice.equalsIgnoreCase("yes")) {
+                // Remove the existing contact
+                contacts.remove(existingContact);
+                System.out.println("Existing contact overridden.");
+            } else {
+                System.out.println("Contact not overridden.");
+                return; // Exit the method without adding the contact
+            }
+        }
+
         System.out.print("Enter the phone number: ");
         String phoneNumber = scanner.next();
         System.out.print("Enter the email: ");
         String email = scanner.next();
+
         contacts.add(new Contacts(name, phoneNumber, email));
         System.out.println("Contact added successfully!");
     }
+
 
     private static void searchContact(Scanner scanner) {
         System.out.print("Enter the name to search: ");
         String searchName = scanner.next().toLowerCase();
         boolean found = false;
         System.out.println("Name | Phone number");
-        System.out.println("-------------------");
+        System.out.println("--------------------------------------");
         for (Contacts contact : contacts) {
             if (contact.getName().toLowerCase().contains(searchName)) {
                 System.out.println(contact);

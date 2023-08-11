@@ -30,7 +30,7 @@ class Contacts {
 
     @Override
     public String toString() {
-        return name + " | " + phoneNumber;
+        return name + " | " + phoneNumber + " | " + email;
     }
 }
 
