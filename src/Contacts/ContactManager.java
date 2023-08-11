@@ -203,6 +203,9 @@ public class ContactManager {
     }
 
     private static void addingContactArt() {
+        String limeGreen = "\u001B[92m";
+        String resetColor = "\u001B[0m";
+
         String art = """    
                     _        _      _  _                  ____               _                _  \s
                    / \\    __| |  __| |(_) _ __    __ _   / ___| ___   _ __  | |_  __ _   ___ | |_\s
@@ -210,10 +213,14 @@ public class ContactManager {
                  / ___ \\| (_| || (_| || || | | || (_| | | |___| (_) || | | || |_| (_| || (__ | |_\s
                 /_/   \\_\\\\__,_| \\__,_||_||_| |_| \\__, |  \\____|\\___/ |_| |_| \\__|\\__,_| \\___| \\__|
                                                  |___/                                           \s""";
-        System.out.println(art);
+        System.out.println(limeGreen + art + resetColor);
+//        System.out.println(limeGreen + "Welcome to the Contact Management App!" + resetColor);
+
     }
 
     private static void searchingContactArt() {
+        String blueColor = "\u001B[94m";
+        String resetColor = "\u001B[0m";
         String art = """
                    _____                           __     _             \s
                   / ___/ ___   ____ _ _____ _____ / /_   (_)____   ____ _
@@ -221,10 +228,12 @@ public class ContactManager {
                  ___/ //  __// /_/ // /   / /__ / / / // // / / // /_/ /\s
                 /____/ \\___/ \\__,_//_/    \\___//_/ /_//_//_/ /_/ \\__, / \s
                                                                 /____/  \s""";
-        System.out.println(art);
+        System.out.println(blueColor+ art + resetColor);
     }
 
     private static void deletingContactArt() {
+        String redColor = "\u001B[91m";
+        String resetColor = "\u001B[0m";
         String art = """
                  ____            ___             __                             \s
                 /\\  _`\\         /\\_ \\           /\\ \\__  __                      \s
@@ -235,10 +244,12 @@ public class ContactManager {
                     \\/___/  \\/____/\\/____/ \\/____/  \\/__/ \\/_/ \\/_/\\/_/ \\/___L\\ \\
                                                                           /\\____/
                                                                           \\_/__/\s""";
-        System.out.println(art);
+        System.out.println(redColor + art + resetColor);
     }
 
     private static void exitApp() {
+        String yellowColor = "\u001B[93m";
+        String resetColor = "\u001B[0m";
         String art = """
                 ████████╗██╗  ██╗ █████╗ ███╗   ██╗██╗  ██╗███████╗                            \s
                 ╚══██╔══╝██║  ██║██╔══██╗████╗  ██║██║ ██╔╝██╔════╝                            \s
@@ -253,18 +264,21 @@ public class ContactManager {
                 ███████╗██║ ╚████║██████╔╝██║██║ ╚████║╚██████╔╝        ██║  ██║██║     ██║██╗ \s
                 ╚══════╝╚═╝  ╚═══╝╚═════╝ ╚═╝╚═╝  ╚═══╝ ╚═════╝         ╚═╝  ╚═╝╚═╝     ╚═╝╚═╝ \s
                                                                                                \s""";
-        System.out.println(art);
+        System.out.println(yellowColor + art + resetColor);
     }
 
     private static void welcome() {
+        String magentaColor = "\u001B[95m";
+        String resetColor = "\u001B[0m";
         String art = """
                  _     _  _______  ___      _______  _______  __   __  _______  __ \s
                 | | _ | ||       ||   |    |       ||       ||  |_|  ||       ||  |\s
                 | || || ||    ___||   |    |       ||   _   ||       ||    ___||  |\s
-                |       ||   |___ |   |    |       ||  | |  ||       ||   |___ |  |\s
+                |       ||   |___ | 
+                  |    |       ||  | |  ||       ||   |___ |  |\s
                 |       ||    ___||   |___ |      _||  |_|  ||       ||    ___||__|\s
                 |   _   ||   |___ |       ||     |_ |       || ||_|| ||   |___  __ \s
                 |__| |__||_______||_______||_______||_______||_|   |_||_______||__|\s""";
-        System.out.println(art);
+        System.out.println(magentaColor + art + resetColor);
     }
 }
