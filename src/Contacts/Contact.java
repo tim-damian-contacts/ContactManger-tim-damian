@@ -3,7 +3,6 @@ package Contacts;
 class Contacts {
     private String name;
     private String phoneNumber;
-
     private String email;
 
     public String getEmail() {
