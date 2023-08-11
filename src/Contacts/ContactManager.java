@@ -3,6 +3,7 @@ package Contacts;
 import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 import java.util.Scanner;
 
 public class ContactManager {
@@ -52,7 +53,27 @@ public class ContactManager {
         System.out.println("4. Delete an existing contact.");
         System.out.println("5. Exit.");
         System.out.print("Enter an option (1, 2, 3, 4, or 5): ");
-        return scanner.nextInt();
+
+        int choice = scanner.nextInt();
+
+        if (choice == 1) {
+            simulateTyping("Loading... View contacts...\n", 100, 150); // Simulate typing for "View contacts" option
+        }
+
+        return choice;
+    }
+
+    public static void simulateTyping(String text, int minDelay, int maxDelay) {
+        Random random = new Random();
+        for (int i = 0; i < text.length(); i++) {
+            System.out.print(text.charAt(i));
+            int delay = random.nextInt(maxDelay - minDelay + 1) + minDelay; // Generate random delay
+            try {
+                Thread.sleep(delay);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+        }
     }
 
     private static void loadContacts() {
