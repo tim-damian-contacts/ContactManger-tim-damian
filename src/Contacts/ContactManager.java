@@ -1,12 +1,13 @@
 package Contacts;
 
+import org.w3c.dom.ls.LSOutput;
 import util.Input;
 
 import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
-import java.util.Scanner;
+
 
 public class ContactManager {
     private static List<Contacts> contacts = new ArrayList<>();
@@ -14,8 +15,8 @@ public class ContactManager {
 
     public static void main(String[] args) {
         loadContacts();
+        welcome();
 
-//        Scanner scanner = new Scanner(System.in);
         Input scanner = new Input();
         int choice;
 
@@ -23,30 +24,29 @@ public class ContactManager {
             choice = displayMainMenu(scanner);
 
             switch (choice) {
-                case 1:
-                    viewContacts();
-                    break;
-                case 2:
+                case 1 -> viewContacts();
+                case 2 -> {
                     addContact(scanner);
                     saveContacts();
-                    break;
-                case 3:
+                    addingContactArt();
+                }
+                case 3 -> {
+                    searchingContactArt();
                     searchContact(scanner);
-                    break;
-                case 4:
+                }
+                case 4 -> {
                     deleteContact(scanner);
+                    deletingContactArt();
                     saveContacts();
-                    break;
-                case 5:
+                }
+                case 5 -> {
                     saveContacts();
+                    exitApp();
                     System.out.println("Exiting the application.");
-                    break;
-                default:
-                    System.out.println("Invalid choice. Please choose a valid option.");
+                }
+                default -> System.out.println("Invalid choice. Please choose a valid option.");
             }
         } while (choice != 5);
-
-//        scanner.close();
     }
 
     private static int displayMainMenu(Input scanner) {
@@ -200,5 +200,71 @@ public class ContactManager {
             System.out.println("Contact not found.");
         }
         saveContacts();
+    }
+
+    private static void addingContactArt() {
+        String art = """    
+                    _        _      _  _                  ____               _                _  \s
+                   / \\    __| |  __| |(_) _ __    __ _   / ___| ___   _ __  | |_  __ _   ___ | |_\s
+                  / _ \\  / _` | / _` || || '_ \\  / _` | | |    / _ \\ | '_ \\ | __|/ _` | / __|| __|
+                 / ___ \\| (_| || (_| || || | | || (_| | | |___| (_) || | | || |_| (_| || (__ | |_\s
+                /_/   \\_\\\\__,_| \\__,_||_||_| |_| \\__, |  \\____|\\___/ |_| |_| \\__|\\__,_| \\___| \\__|
+                                                 |___/                                           \s""";
+        System.out.println(art);
+    }
+
+    private static void searchingContactArt() {
+        String art = """
+                   _____                           __     _             \s
+                  / ___/ ___   ____ _ _____ _____ / /_   (_)____   ____ _
+                  \\__ \\ / _ \\ / __ `// ___// ___// __ \\ / // __ \\ / __ `/
+                 ___/ //  __// /_/ // /   / /__ / / / // // / / // /_/ /\s
+                /____/ \\___/ \\__,_//_/    \\___//_/ /_//_//_/ /_/ \\__, / \s
+                                                                /____/  \s""";
+        System.out.println(art);
+    }
+
+    private static void deletingContactArt() {
+        String art = """
+                 ____            ___             __                             \s
+                /\\  _`\\         /\\_ \\           /\\ \\__  __                      \s
+                \\ \\ \\/\\ \\     __\\//\\ \\       __ \\ \\ ,_\\/\\_\\     ___       __    \s
+                 \\ \\ \\ \\ \\  /'__`\\\\ \\ \\    /'__`\\\\ \\ \\/\\/\\ \\  /' _ `\\   /'_ `\\  \s
+                  \\ \\ \\_\\ \\/\\  __/ \\_\\ \\_ /\\  __/ \\ \\ \\_\\ \\ \\ /\\ \\/\\ \\ /\\ \\L\\ \\ \s
+                   \\ \\____/\\ \\____\\/\\____\\\\ \\____\\ \\ \\__\\\\ \\_\\\\ \\_\\ \\_\\\\ \\____ \\\s
+                    \\/___/  \\/____/\\/____/ \\/____/  \\/__/ \\/_/ \\/_/\\/_/ \\/___L\\ \\
+                                                                          /\\____/
+                                                                          \\_/__/\s""";
+        System.out.println(art);
+    }
+
+    private static void exitApp() {
+        String art = """
+                ████████╗██╗  ██╗ █████╗ ███╗   ██╗██╗  ██╗███████╗                            \s
+                ╚══██╔══╝██║  ██║██╔══██╗████╗  ██║██║ ██╔╝██╔════╝                            \s
+                   ██║   ███████║███████║██╔██╗ ██║█████╔╝ ███████╗                            \s
+                   ██║   ██╔══██║██╔══██║██║╚██╗██║██╔═██╗ ╚════██║                            \s
+                   ██║   ██║  ██║██║  ██║██║ ╚████║██║  ██╗███████║▄█╗                         \s
+                   ╚═╝   ╚═╝  ╚═╝╚═╝  ╚═╝╚═╝  ╚═══╝╚═╝  ╚═╝╚══════╝╚═╝                         \s
+                ███████╗███╗   ██╗██████╗ ██╗███╗   ██╗ ██████╗          █████╗ ██████╗ ██████╗\s
+                ██╔════╝████╗  ██║██╔══██╗██║████╗  ██║██╔════╝         ██╔══██╗██╔══██╗██╔══██╗
+                █████╗  ██╔██╗ ██║██║  ██║██║██╔██╗ ██║██║  ███╗        ███████║██████╔╝██████╔╝
+                ██╔══╝  ██║╚██╗██║██║  ██║██║██║╚██╗██║██║   ██║        ██╔══██║██╔═══╝ ██╔═══╝\s
+                ███████╗██║ ╚████║██████╔╝██║██║ ╚████║╚██████╔╝        ██║  ██║██║     ██║██╗ \s
+                ╚══════╝╚═╝  ╚═══╝╚═════╝ ╚═╝╚═╝  ╚═══╝ ╚═════╝         ╚═╝  ╚═╝╚═╝     ╚═╝╚═╝ \s
+                                                                                               \s""";
+        System.out.println(art);
+    }
+
+    private static void welcome() {
+        String art = """
+                 _     _  _______  ___      _______  _______  __   __  _______  __ \s
+                | | _ | ||       ||   |    |       ||       ||  |_|  ||       ||  |\s
+                | || || ||    ___||   |    |       ||   _   ||       ||    ___||  |\s
+                |       ||   |___ |   |    |       ||  | |  ||       ||   |___ |  |\s
+                |       ||    ___||   |___ |      _||  |_|  ||       ||    ___||__|\s
+                |   _   ||   |___ |       ||     |_ |       || ||_|| ||   |___  __ \s
+                |__| |__||_______||_______||_______||_______||_|   |_||_______||__|\s""";
+        System.out.println(art);
     }
 }
