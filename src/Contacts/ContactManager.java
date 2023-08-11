@@ -7,7 +7,7 @@ import java.util.Scanner;
 
 public class ContactManager {
     private static List<Contacts> contacts = new ArrayList<>();
-    private static final String FILE_PATH = "/Users/timothysingletary/ideaprojects/ContactManger-tim-damian/src/contacts.txt";
+    private static final String FILE_PATH = "./src/contacts.txt";
 
     public static void main(String[] args) {
         loadContacts();
@@ -82,15 +82,19 @@ public class ContactManager {
 
     private static String formatPhoneNumber(String phoneNumber) {
         // Assuming phoneNumber is a string of digits without dashes
+        phoneNumber = phoneNumber.replace("-", "");
         return phoneNumber.substring(0, 3) + "-" + phoneNumber.substring(3, 6) + "-" + phoneNumber.substring(6);
     }
 
     private static void viewContacts() {
-        System.out.println("Name | Phone number | Email");
-        System.out.println("--------------------------------------");
+        System.out.println("===========================================================");
+        System.out.println("|NAME                |PHONE NUMBER   |EMAIL               |");
+        System.out.println("===========================================================");
         for (Contacts contact : contacts) {
             String formattedPhoneNumber = formatPhoneNumber(contact.getPhoneNumber()); // Format phone number
-            System.out.println(contact.getName() + " | " + formattedPhoneNumber + " | " + contact.getEmail());
+//            System.out.println(contact.getName() + " | " + formattedPhoneNumber + " | " + contact.getEmail());
+            System.out.printf("|%-20s|%-15s|%-20s|\n",contact.getName(), formattedPhoneNumber, contact.getEmail());
+            System.out.println("+--------------------+---------------+--------------------+");
         }
     }
 
