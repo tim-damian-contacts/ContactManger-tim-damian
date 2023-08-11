@@ -24,12 +24,14 @@ public class ContactManager {
                     break;
                 case 2:
                     addContact(scanner);
+                    saveContacts();
                     break;
                 case 3:
                     searchContact(scanner);
                     break;
                 case 4:
                     deleteContact(scanner);
+                    saveContacts();
                     break;
                 case 5:
                     saveContacts();
@@ -93,7 +95,7 @@ public class ContactManager {
         for (Contacts contact : contacts) {
             String formattedPhoneNumber = formatPhoneNumber(contact.getPhoneNumber()); // Format phone number
 //            System.out.println(contact.getName() + " | " + formattedPhoneNumber + " | " + contact.getEmail());
-            System.out.printf("|%-20s|%-15s|%-20s|\n",contact.getName(), formattedPhoneNumber, contact.getEmail());
+            System.out.printf("|%-20s|%-15s|%-20s|\n", contact.getName(), formattedPhoneNumber, contact.getEmail());
             System.out.println("+--------------------+---------------+--------------------+");
         }
     }
@@ -132,8 +134,8 @@ public class ContactManager {
 
         contacts.add(new Contacts(name, phoneNumber, email));
         System.out.println("Contact added successfully!");
+        saveContacts();
     }
-
 
     private static void searchContact(Scanner scanner) {
         System.out.print("Enter the name to search: ");
@@ -168,5 +170,6 @@ public class ContactManager {
         } else {
             System.out.println("Contact not found.");
         }
+        saveContacts();
     }
 }
