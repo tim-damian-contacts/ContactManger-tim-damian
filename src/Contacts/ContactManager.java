@@ -114,13 +114,13 @@ public class ContactManager {
     }
 
     private static void viewContacts() {
-        System.out.println("===========================================================");
-        System.out.println("|NAME                |PHONE NUMBER   |EMAIL               |");
-        System.out.println("===========================================================");
+        System.out.println("=================================================");
+        System.out.println("|NAME           |PHONE NUMBER   |EMAIL          |");
+        System.out.println("=================================================");
         for (Contacts contact : contacts) {
             String formattedPhoneNumber = formatPhoneNumber(contact.getPhoneNumber()); // Format phone number
-            System.out.printf("|%-20s|%-15s|%-20s|\n", contact.getName(), formattedPhoneNumber, contact.getEmail());
-            System.out.println("+--------------------+---------------+--------------------+");
+            System.out.printf("|%-15s|%-15s|%-15s|\n", contact.getName(), formattedPhoneNumber, contact.getEmail());
+            System.out.println("+---------------+---------------+---------------+");
         }
         System.out.println();
     }
@@ -166,14 +166,14 @@ public class ContactManager {
         System.out.print("Enter the name to search: ");
         String searchName = scanner.getString().toLowerCase();
         boolean found = false;
-        System.out.println("===========================================================");
-        System.out.println("|NAME                |PHONE NUMBER   |EMAIL               |");
-        System.out.println("===========================================================");
+        System.out.println("=================================================");
+        System.out.println("|NAME           |PHONE NUMBER   |EMAIL          |");
+        System.out.println("=================================================");
         for (Contacts contact : contacts) {
             if (contact.getName().toLowerCase().contains(searchName)) {
                 String formattedPhoneNumber = formatPhoneNumber(contact.getPhoneNumber());
-                System.out.printf("|%-20s|%-15s|%-20s|\n", contact.getName(), formattedPhoneNumber, contact.getEmail());
-                System.out.println("+--------------------+---------------+--------------------+");
+                System.out.printf("|%-15s|%-15s|%-15s|\n", contact.getName(), formattedPhoneNumber, contact.getEmail());
+                System.out.println("+---------------+---------------+---------------+");
                 found = true;
             }
             System.out.println();
