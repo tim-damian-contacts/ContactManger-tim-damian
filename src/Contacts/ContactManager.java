@@ -1,5 +1,7 @@
 package Contacts;
 
+import util.Input;
+
 import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -13,7 +15,8 @@ public class ContactManager {
     public static void main(String[] args) {
         loadContacts();
 
-        Scanner scanner = new Scanner(System.in);
+//        Scanner scanner = new Scanner(System.in);
+        Input scanner = new Input();
         int choice;
 
         do {
@@ -43,10 +46,11 @@ public class ContactManager {
             }
         } while (choice != 5);
 
-        scanner.close();
+//        scanner.close();
     }
 
-    private static int displayMainMenu(Scanner scanner) {
+    private static int displayMainMenu(Input scanner) {
+        System.out.println("+===================+\n|     MAIN MENU     |\n+===================+");
         System.out.println("1. View contacts.");
         System.out.println("2. Add a new contact.");
         System.out.println("3. Search a contact by name.");
@@ -54,7 +58,7 @@ public class ContactManager {
         System.out.println("5. Exit.");
         System.out.print("Enter an option (1, 2, 3, 4, or 5): ");
 
-        int choice = scanner.nextInt();
+        int choice = scanner.getInt();
 
         if (choice == 1) {
             simulateTyping("Loading... View contacts...\n", 100, 150); // Simulate typing for "View contacts" option
@@ -115,15 +119,15 @@ public class ContactManager {
         System.out.println("===========================================================");
         for (Contacts contact : contacts) {
             String formattedPhoneNumber = formatPhoneNumber(contact.getPhoneNumber()); // Format phone number
-//            System.out.println(contact.getName() + " | " + formattedPhoneNumber + " | " + contact.getEmail());
             System.out.printf("|%-20s|%-15s|%-20s|\n", contact.getName(), formattedPhoneNumber, contact.getEmail());
             System.out.println("+--------------------+---------------+--------------------+");
         }
+        System.out.println();
     }
 
-    private static void addContact(Scanner scanner) {
+    private static void addContact(Input scanner) {
         System.out.print("Enter the name: ");
-        String name = scanner.next();
+        String name = scanner.getString();
 
         // Check if the name already exists
         Contacts existingContact = null;
@@ -137,8 +141,8 @@ public class ContactManager {
         if (existingContact != null) {
             System.out.println("A contact with the same name already exists.");
             System.out.print("Do you want to override the existing contact? (yes/no): ");
-            String overrideChoice = scanner.next();
-            if (overrideChoice.equalsIgnoreCase("yes")) {
+            boolean overrideChoice = scanner.yesNo();
+            if (overrideChoice) {
                 // Remove the existing contact
                 contacts.remove(existingContact);
                 System.out.println("Existing contact overridden.");
@@ -149,35 +153,39 @@ public class ContactManager {
         }
 
         System.out.print("Enter the phone number: ");
-        String phoneNumber = scanner.next();
+        String phoneNumber = scanner.getString();
         System.out.print("Enter the email: ");
-        String email = scanner.next();
+        String email = scanner.getString();
 
         contacts.add(new Contacts(name, phoneNumber, email));
         System.out.println("Contact added successfully!");
         saveContacts();
     }
 
-    private static void searchContact(Scanner scanner) {
+    private static void searchContact(Input scanner) {
         System.out.print("Enter the name to search: ");
-        String searchName = scanner.next().toLowerCase();
+        String searchName = scanner.getString().toLowerCase();
         boolean found = false;
-        System.out.println("Name | Phone number");
-        System.out.println("--------------------------------------");
+        System.out.println("===========================================================");
+        System.out.println("|NAME                |PHONE NUMBER   |EMAIL               |");
+        System.out.println("===========================================================");
         for (Contacts contact : contacts) {
             if (contact.getName().toLowerCase().contains(searchName)) {
-                System.out.println(contact);
+                String formattedPhoneNumber = formatPhoneNumber(contact.getPhoneNumber());
+                System.out.printf("|%-20s|%-15s|%-20s|\n", contact.getName(), formattedPhoneNumber, contact.getEmail());
+                System.out.println("+--------------------+---------------+--------------------+");
                 found = true;
             }
+            System.out.println();
         }
         if (!found) {
             System.out.println("Contact not found.");
         }
     }
 
-    private static void deleteContact(Scanner scanner) {
+    private static void deleteContact(Input scanner) {
         System.out.print("Enter the name to delete: ");
-        String deleteName = scanner.next().toLowerCase();
+        String deleteName = scanner.getString().toLowerCase();
         Contacts contactToRemove = null;
         for (Contacts contact : contacts) {
             if (contact.getName().toLowerCase().contains(deleteName)) {
