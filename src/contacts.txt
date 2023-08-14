@@ -2,5 +2,3 @@ josh | 123-456-7890 | joshypooh
 Nic | 910-748-7846 | nic.rowley@nic
 testtting | 127-373-8890 | yfvugyfhvhu
 testy | 777-777-777 | test@testtsin
-a | 123-456-7 | 123@123
-damian | 210-307-8183 | damianrsolis@gmail.com
